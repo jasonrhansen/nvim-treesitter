@@ -45,7 +45,7 @@
 ((identifier) @function
  (#eq? @function "require"))
 
-"defined?" @function
+"defined?" @method
 
 (call
   [
@@ -53,7 +53,7 @@
    method: [
             (identifier)
             (constant)
-            ] @function
+            ] @method
    ])
 
 (method_call
@@ -62,21 +62,21 @@
    method: [
             (identifier)
             (constant)
-            ] @function
+            ] @method
    ])
 
 ; Function definitions
 
-(alias (identifier) @function)
+(alias (identifier) @method)
 (setter (identifier) @function)
 
 (method name: [
-               (identifier) @function
+               (identifier) @method
                (constant) @constant
                ])
 
 (singleton_method name: [
-                         (identifier) @function
+                         (identifier) @method
                          (constant) @constant
                          ])
 
@@ -85,8 +85,8 @@
 ; Identifiers
 [
  (class_variable)
- (instance_variable) 
- ] @label
+ (instance_variable)
+ ] @property
 
 ((identifier) @constant.builtin
  (#match? @constant.builtin "^__(FILE|LINE|ENCODING)__$"))
@@ -99,7 +99,7 @@
 [
  (self)
  (super)
- ] @constant.builtin
+ ] @variable.builtin
 
 (method_parameters (identifier) @parameter)
 (lambda_parameters (identifier) @parameter)
@@ -129,9 +129,9 @@
  (heredoc_beginning)
  (heredoc_end)
  (symbol)
- ] @constant
+ ] @keyword
 
-(pair key: (symbol) ":" @constant)
+(pair key: (symbol) ":" @keyword)
 (regex) @string.regex
 (escape_sequence) @string.escape
 (integer) @number
